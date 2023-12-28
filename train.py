@@ -7,6 +7,7 @@ from albumentations.pytorch import ToTensorV2
 from torch.utils.data import DataLoader
 
 from dataset import CatDogMiniDataset
+from logger import Logger
 from model import MyNet
 
 
@@ -47,7 +48,7 @@ def main():
     optimizer = optim.Adam(network.parameters(), lr=0.001)
 
     # 6. Logger object
-    pass
+    logger = Logger(device)
 
     # 7. Training loop
     print("training is started")
@@ -68,6 +69,9 @@ def main():
 
             # 12 . adjust the weights
             optimizer.step()
+
+            # 13. collect result into the logger
+            logger.log_step(loss.item())
 
 
 if __name__ == "__main__":

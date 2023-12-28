@@ -33,19 +33,25 @@ class MyNet(nn.Module):
         )
 
     def forward(self, x):
-        # input x pass conv1
-        # image shape 32,32,3 to batch size
-        # x shape = (batch_size,channels,height,width)
-        h = self.conv1(x)
-        # if x < 0 ? 0 by relu
-        h = F.relu(h)
-        h = F.relu(self.conv2(x))
-
-        # h shape = (batch_size,32 (features),h,w)
-
-        # reshape to remain 1 dim because linear need 1 dim
-        # h  -> (batch_size,32*h*w) to be long vector for linear
+        h = F.relu(self.conv1(x))
+        h = F.relu(self.conv2(h))
         h = h.reshape(h.shape[0], -1)
         h = F.relu(self.linear(h))
-        y_pred = self.out(h)
-        return y_pred
+        y = self.out(h)
+        return y
+        # # input x pass conv1
+        # # image shape 32,32,3 to batch size
+        # # x shape = (batch_size,channels,height,width)
+        # h = self.conv1(x)
+        # # if x < 0 ? 0 by relu
+        # h = F.relu(h)
+        # h = F.relu(self.conv2(h))
+
+        # # h shape = (batch_size,32 (features),h,w)
+
+        # # reshape to remain 1 dim because linear need 1 dim
+        # # h  -> (batch_size,32*h*w) to be long vector for linear
+        # h = h.reshape(h.shape[0], -1)
+        # h = F.relu(self.linear(h))
+        # y_pred = self.out(h)
+        # return y_pred
