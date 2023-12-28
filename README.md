@@ -58,3 +58,7 @@ https://drive.google.com/drive/folders/1feL5X6epYQiGaT-dHpgV7yWU7_ZthVVI?usp=sha
 4.3 compute gradients
 4.4 adjust the weights
 4.5 collect result into the logger
+
+#git
+git remote add origin git@github.com:angpao/classifier.git
+git push -u origin main
